@@ -6,6 +6,7 @@ import TenderDetailsPage from "./pages/TenderDetailsPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import LoginPage from "./pages/LoginPage";
 import { AuthProvider } from "./context/AuthContext";
+import Layout from "./components/Layout";
 // import { PrimeReactProvider } from "primereact/api";
 
 const App: React.FC = () => (
@@ -13,11 +14,39 @@ const App: React.FC = () => (
     <Router>
       {/* <PrimeReactProvider value={{ unstyled: true }}> */}
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/"
+          element={
+            <Layout>
+              <HomePage />
+            </Layout>
+          }
+        />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/user-dashboard" element={<UserDashboardPage />} />
-        <Route path="/tender/:tenderId" element={<TenderDetailsPage />} />
-        <Route path="/admin-dashboard" element={<AdminDashboardPage />} />
+        <Route
+          path="/user-dashboard"
+          element={
+            <Layout>
+              <UserDashboardPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/tender/:tenderId"
+          element={
+            <Layout>
+              <TenderDetailsPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/admin-dashboard"
+          element={
+            <Layout>
+              <AdminDashboardPage />
+            </Layout>
+          }
+        />
       </Routes>
       {/* </PrimeReactProvider> */}
     </Router>

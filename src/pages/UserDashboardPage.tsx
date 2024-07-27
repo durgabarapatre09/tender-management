@@ -1,6 +1,6 @@
 // src/pages/UserDashboardPage.tsx
-import React from 'react';
-import UserDashboard from '../components/UserDashboard';
+import React from "react";
+import UserDashboard from "../components/UserDashboard";
 
 const UserDashboardPage: React.FC = () => (
   <div className="p-4">
