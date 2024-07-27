@@ -1,77 +1,62 @@
 import React from 'react';
-import { useTable } from '@tanstack/react-table';
-import { tenders, bids } from '../mockData';
 
-const AdminDashboard: React.FC = () => {
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: 'Title',
-        accessor: 'title',
-      },
-      {
-        Header: 'Min Amount',
-        accessor: 'minAmount',
-      },
-      {
-        Header: 'Max Amount',
-        accessor: 'maxAmount',
-      },
-      {
-        Header: 'Location',
-        accessor: 'location',
-      },
-    ],
-    []
-  );
+interface Tender {
+  key: string;
+  title: string;
+  minAmount: number;
+  maxAmount: number;
+  location: string;
+}
 
-  const data = React.useMemo(() => tenders, []);
+const data: Tender[] = [
+  {
+    key: '1',
+    title: 'Tender 1',
+    minAmount: 1000,
+    maxAmount: 5000,
+    location: 'New York',
+  },
+  {
+    key: '2',
+    title: 'Tender 2',
+    minAmount: 2000,
+    maxAmount: 6000,
+    location: 'London',
+  },
+  {
+    key: '3',
+    title: 'Tender 3',
+    minAmount: 3000,
+    maxAmount: 7000,
+    location: 'Sydney',
+  },
+];
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({ columns, data });
-
-  return (
-    <div className="p-4">
-      <table {...getTableProps()} className="min-w-full leading-normal">
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th
-                  {...column.getHeaderProps()}
-                  className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-                >
-                  {column.render('Header')}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map(row => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()}>
-                {row.cells.map(cell => (
-                  <td
-                    {...cell.getCellProps()}
-                    className="px-5 py-5 border-b border-gray-200 bg-white text-sm"
-                  >
-                    {cell.render('Cell')}
-                  </td>
-                ))}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
-  );
-};
+const AdminDashboard: React.FC = () => (
+  <table>
+    <thead className='p-2 border-red-500'>
+      <tr>
+        <th>Title</th>
+        <th>Min Amount</th>
+        <th>Max Amount</th>
+        <th>Location</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {data.map((tender) => (
+        <tr key={tender.key}>
+          <td>{tender.title}</td>
+          <td>{tender.minAmount}</td>
+          <td>{tender.maxAmount}</td>
+          <td>{tender.location}</td>
+          <td>
+            <a href="#">View {tender.title}</a> | <a href="#">Delete</a>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+);
 
 export default AdminDashboard;
