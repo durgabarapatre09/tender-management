@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
-  navigate("/login")
+  useEffect(() => {
+    navigate("/login")
+  }, []);
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <button
